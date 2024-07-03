@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 let courses = [
   { id: 1, name: "java" },
@@ -8,6 +9,15 @@ let courses = [
 ];
 
 app.get("/courses", (req, res) => {
+  res.json(courses);
+});
+
+app.post("/courses", (req, res) => {
+  const newCourse = {
+    id: courses.length + 1,
+    name: req.body.name,
+  };
+  courses.push(newCourse);
   res.json(courses);
 });
 
